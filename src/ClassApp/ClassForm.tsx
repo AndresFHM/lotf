@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, FormEvent } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
@@ -8,9 +8,13 @@ const cityErrorMessage = "State is Invalid";
 const phoneNumberErrorMessage = "Invalid Phone Number";
 
 export class ClassForm extends Component {
+  userSubmitHandle = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+  };
   render() {
     return (
-      <form>
+      <form id="user-info-form" onSubmit={this.userSubmitHandle}>
         <u>
           <h3>User Information Form</h3>
         </u>

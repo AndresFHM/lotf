@@ -1,3 +1,4 @@
+import { FormEvent } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
@@ -7,8 +8,15 @@ const cityErrorMessage = "State is Invalid";
 const phoneNumberErrorMessage = "Invalid Phone Number";
 
 export const FunctionalForm = () => {
+  const userSubmitHandle = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+  }
+
   return (
-    <form>
+    <form
+      id="user-info-form"
+      onSubmit={userSubmitHandle}
+    >
       <u>
         <h3>User Information Form</h3>
       </u>
@@ -16,7 +24,10 @@ export const FunctionalForm = () => {
       {/* first name input */}
       <div className="input-wrap">
         <label>{"First Name"}:</label>
-        <input placeholder="Bilbo" />
+        <input
+          placeholder="Bilbo"
+          
+        />
       </div>
       <ErrorMessage message={firstNameErrorMessage} show={true} />
 
