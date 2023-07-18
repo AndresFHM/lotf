@@ -1,5 +1,6 @@
 import { Component, FormEvent } from "react";
 import { ErrorMessage } from "../ErrorMessage";
+import { allCities } from "../utils/all-cities";
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
 const lastNameErrorMessage = "Last name must be at least 2 characters long";
@@ -43,8 +44,30 @@ export class ClassForm extends Component {
         {/* City Input */}
         <div className="input-wrap">
           <label>{"City"}:</label>
-          <input placeholder="Hobbiton" />
+          <select
+          value="Hobbiton"
+
+          className="city-select"
+          >
+          <option value="">Hobbiton</option>
+            </select>
         </div>
+      {/* <div className="input-wrap">
+        <label>{"City"}:</label>
+        <select
+          value={selectedCity}
+          onChange={(e) => setSelectedCity(e.target.value)}
+          className="city-select"
+        >
+          <option value="">Hobbiton</option>
+          {allCities.map((city) => (
+            <option key={city} value={city}>
+              {city}
+            </option>
+          ))}
+        </select>
+      </div> */}
+
         <ErrorMessage message={cityErrorMessage} show={true} />
 
         <div className="input-wrap">
