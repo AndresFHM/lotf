@@ -79,6 +79,7 @@ form select.city-select {
 
 form select.city-select {
   width: 310px;
+
   font-family: MorrisRoman;
   appearance: none;
   padding: 0.5em;
@@ -165,6 +166,35 @@ form label {
   display: flex;
   justify-content: space-between;
 }
+
+
+
+/* .city-input-container {
+  position: relative;
+}
+
+.city-input {
+  background-repeat: no-repeat;
+  background-size: 10px 10px;
+}
+
+.city-input:hover{
+  background-color: pink;
+} */
+
+/* .city-input::after {
+  content: "\25BC"; 
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0;
+} */
+
+
+
 
 #phone-input-1 {
   width: 30px;

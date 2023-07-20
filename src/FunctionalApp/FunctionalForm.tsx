@@ -3,7 +3,7 @@ import { FormEvent, useState } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 import { FunctionalPhoneInput, FunctionalPhoneInputState } from "./FunctionalPhoneInput";
 import { allCities } from "../utils/all-cities";
-import { calculateIsFirstNameValid, calculateIsLastNameValid, isEmailValid } from "../utils/validations";
+import { calculateIsFirstNameValid, calculateIsLastNameValid, isEmailValid, isCityValid } from "../utils/validations";
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
 const lastNameErrorMessage = "Last name must be at least 2 characters long";
@@ -15,24 +15,27 @@ export const FunctionalForm = () => {
   const [firstNameInput, setFirstNameInput] = useState("");
   const [lastNameInput, setLastNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
+  const [cityInput, setCityInput] = useState("")
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const isFirstNameInputValid = calculateIsFirstNameValid(firstNameInput);
   const isLastNameInputValid = calculateIsLastNameValid(lastNameInput);
   const isEmailInputValid = isEmailValid(emailInput);
-  
+  const isCityInputValid = isCityValid(cityInput)
+  const [isPhoneInputValid, setIsPhoneInputValid] = useState(false);
 
-  const shouldShowFirstNameError = isSubmitted && !isFirstNameInputValid
-  const shouldShowLastNameError = isSubmitted && !isLastNameInputValid
-  const shouldShowEmailError = isSubmitted && !isEmailInputValid
+  const shouldShowFirstNameError = isSubmitted && !isFirstNameInputValid;
+  const shouldShowLastNameError = isSubmitted && !isLastNameInputValid;
+  const shouldShowEmailError = isSubmitted && !isEmailInputValid;
+  const shouldShowCityError = isSubmitted && !isCityInputValid;
+  const shouldShowPhoneError = isSubmitted && !isPhoneInputValid;
 
-  const [selectedCity, setSelectedCity] = useState("");
   const [phoneInput, setPhoneInput] = useState<FunctionalPhoneInputState>([
     "", 
     "",
     "",
     ""]);
-  const [isPhoneInputValid, setIsPhoneInputValid] = useState(false);
+
 
   const setPhoneInputState = (newState: FunctionalPhoneInputState) => {
     const isInputFilled = newState.every((input) => input.length > 0);
@@ -44,7 +47,7 @@ export const FunctionalForm = () => {
     e.preventDefault();
     setIsSubmitted(true);
   }
-  const shouldShowPhoneError = isSubmitted && !isPhoneInputValid;
+
 
   return (
     <form
@@ -83,7 +86,7 @@ export const FunctionalForm = () => {
         />
       </div>
       {shouldShowLastNameError && (
-      <ErrorMessage message={lastNameErrorMessage} show={true} />
+        <ErrorMessage message={lastNameErrorMessage} show={true} />
       )}
 
 
@@ -99,31 +102,26 @@ export const FunctionalForm = () => {
         />
       </div>
       {shouldShowEmailError && (
-      <ErrorMessage message={emailErrorMessage} show={true} />
+        <ErrorMessage message={emailErrorMessage} show={true} />
       )}
 
 
       {/* City Input */}
-
-      <div className="input-wrap">
+      <div className="input-wrap city-input-container">
         <label>{"City"}:</label>
-        <select
-          value={selectedCity}
-          onChange={(e) => setSelectedCity(e.target.value)}
-          className="city-select"
-        >
-        <option disabled value="">
-          Hobbiton
-        </option>
-          {allCities.map((city) => (
-        <option key={city} value={city}>
-          {city}
-        </option>
-        ))}
-        </select>
-
+        <input
+          className="city-input"
+          placeholder="Hobbiton"
+          onChange={(e) => {
+            setCityInput(e.target.value)
+          }}
+          value={cityInput}
+        />
       </div>
-      <ErrorMessage message={cityErrorMessage} show={!selectedCity} />
+      {shouldShowCityError && (
+        <ErrorMessage message={cityErrorMessage} show={true} />
+      )}
+
 
       <FunctionalPhoneInput
         phoneInputState={phoneInput}
@@ -135,4 +133,3 @@ export const FunctionalForm = () => {
     </form>
   );
 };
-

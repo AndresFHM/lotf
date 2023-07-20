@@ -1,3 +1,4 @@
+
 import { ProfileInformation } from "../ProfileInformation";
 import { FunctionalForm } from "./FunctionalForm";
 
@@ -14,7 +15,6 @@ export const FunctionalApp = () => {
       reset()   
       }}>
 
-      <input type="submit" value="Submit" />
       </form>
       <h2>Functional</h2>
 

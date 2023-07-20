@@ -17,6 +17,11 @@ export function isEmailValid(emailAddress: string) {
     return !!emailAddress.match(regex);
 }
 
+export function isCityValid(city: string): boolean {
+    const regex = /^[a-zA-Z\s]+$/;
+    return city.trim().length > 1 && !!city.match(regex);
+}
+
 export const isPhoneNumberValid = (phoneNumber: string): boolean => {
     const regex = /^\d{2}-\d{2}-\d{2}-\d{1}$/; 
     return !!phoneNumber.match(regex);
